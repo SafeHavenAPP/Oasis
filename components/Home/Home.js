@@ -5,30 +5,31 @@ import { StyleSheet, Button, View, SafeAreaView, Dimensions } from 'react-native
 import axios from 'axios';
 import { YellowBox } from 'react-native-web';
 
-export default function Home() {
+export default function Home({ navigation }) {
 
-  async function yelpMap(){
-  const config = {
-    headers: {
-      Authorization:
-        "Bearer ",
-    },
-    params: {
-      term: "restaurants",
-      location: '1234 Street Street',
-      radius: 1609,
-      sort_by: "relevance",
-      limit: 50,
-    },
-  };
-  return(
-   await axios
-    .get("https://api.yelp.com/v3/businesses/search", config)
-    .then((response) => {
-      console.log(response); //These are the results sent back from the API!
-    })
-  )
-  }
+  // async function yelpMap(){
+  // const config = {
+  //   headers: {
+  //     Authorization:
+  //       "Bearer ",
+  //   },
+  //   params: {
+  //     term: "restaurants",
+  //     location: '1234 Street Street',
+  //     radius: 1609,
+  //     sort_by: "relevance",
+  //     limit: 50,
+  //   },
+  // };
+  // return(
+  //  await axios
+  //   .get("https://api.yelp.com/v3/businesses/search", config)
+  //   .then((response) => {
+  //     console.log(response); //These are the results sent back from the API!
+  //   })
+  // )
+  // }
+
 
   
   return (
@@ -39,7 +40,7 @@ export default function Home() {
         <View style={styles.container}>
           <MapView style={styles.map} />
         </View>
-      <Button title='string' onPress={()=> yelpMap()}/>
+      <Button title='Profile' onPress={()=> navigation.navigate('Profile')}/>
     </SafeAreaView>
   );
 }

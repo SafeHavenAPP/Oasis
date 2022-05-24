@@ -15,10 +15,11 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator 
-      initialRouteName="Home"
-      screenOptions={{ headerTitle: (props) => <Header {...props} /> }}
+      initialRouteName="Home" 
+      options={{headerTitle: () => (
+        <Header />
+      )}}
       >
-        {/* <Header /> */}
         <Stack.Screen 
           name='Home' 
           component={Home}
@@ -27,7 +28,8 @@ export default function App() {
         <Stack.Screen 
         name='Profile' 
         component={Profile} 
-        options={({ route }) => ({ title: route.params.name })}
+        options={{ title: 'My Profile' }}
+
         />
         {/* <Footer /> */}
       </Stack.Navigator>

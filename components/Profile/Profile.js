@@ -8,7 +8,6 @@ export default function Profile() {
       <Text>this is a PROFILE PAGE hello</Text>
       <StatusBar style="auto" />
     </View>
-
   );
 }
 
