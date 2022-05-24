@@ -11,7 +11,7 @@ export default function Home() {
   const config = {
     headers: {
       Authorization:
-        "Bearer AcgEMJYgCZy8PIs_282z29OYmlIjq_8QT-QiSa-VHdnmkzcSVCyL0Tny4KjEkh9XQdDyGj2zq_Dui_wNIC8JedqHu34B_BNj86MUkuBnPJczv5PDJtxAJkHoo34UYnYx",
+        "Bearer ",
     },
     params: {
       term: "restaurants",
