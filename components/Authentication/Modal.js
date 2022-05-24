@@ -1,13 +1,6 @@
-import * as React from 'react';
-import { Modal, StyleSheet } from "react-native";
-import LoginForm from './LoginForm.js'
-
 
 export default function ModalLogin() {
-  const [isModalVisible, setIsModalVisible] = React.useState(true);
-  const toggleModal = () => {
-    setIsModalVisible(!isModalVisible);
-  };
+  
   return (
     <View style={styles.container}>
       <Modal isVisible={isModalVisible}>

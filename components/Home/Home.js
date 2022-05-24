@@ -2,8 +2,9 @@ import * as React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import MapView from 'react-native-maps';
 import { StyleSheet, Button, View, SafeAreaView, Dimensions } from 'react-native';
-import axios from 'axios';
-import { YellowBox } from 'react-native-web';
+// import axios from 'axios';
+// import { YellowBox } from 'react-native-web';
+import HeaderView from '../Header/Header';
 
 export default function Home({ navigation }) {
 
@@ -34,6 +35,7 @@ export default function Home({ navigation }) {
   
   return (
     <SafeAreaView style={styles.container}>
+      <HeaderView />
       <View style={styles.container}>
         <StatusBar style="auto" />
       </View>
