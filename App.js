@@ -6,7 +6,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Footer from './components/Footer/Footer.js'
 import Home from './components/Home/Home.js'
 import Profile from './components/Profile/Profile.js';
-// import Header from './components/Header.js';
+import Header from './components/Header/Header.js';
 
 export default function App() {
 
@@ -16,9 +16,9 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator 
       initialRouteName="Home" 
-      // options={{headerTitle: () => (
-      //   <Header />
-      // )}}
+      screenOptions={{headerTitle: () => (
+        <Header />
+      )}}
       >
         <Stack.Screen 
           name='Home' 

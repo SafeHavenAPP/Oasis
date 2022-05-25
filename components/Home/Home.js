@@ -4,7 +4,6 @@ import MapView from 'react-native-maps';
 import { StyleSheet, Button, View, SafeAreaView, Dimensions } from 'react-native';
 // import axios from 'axios';
 // import { YellowBox } from 'react-native-web';
-import HeaderView from '../Header/Header';
 
 export default function Home({ navigation }) {
 
@@ -35,21 +34,20 @@ export default function Home({ navigation }) {
   
   return (
     <SafeAreaView style={styles.container}>
-      <HeaderView />
-      <View style={styles.container}>
-        <StatusBar style="auto" />
-      </View>
         <View style={styles.container}>
+        <StatusBar style='auto' />
+      </View>
+        <View>
           <MapView style={styles.map} />
         </View>
-      <Button title='Profile' onPress={()=> navigation.navigate('Profile')}/>
+      <Button  color="#841584" title='Profile' onPress={()=> navigation.navigate('Profile')}/>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 3,
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
@@ -57,5 +55,5 @@ const styles = StyleSheet.create({
   map: {
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height,
-  },
+  }
 });

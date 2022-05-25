@@ -2,7 +2,7 @@ import * as React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button, Modal } from 'react-native';
 // import ModalLogin from  '../Authentication/Modal.js'
-import LoginForm from '../Authentication/LoginForm.js'
+import SignupForm from '../Authentication/SignupForm.js'
 
 
 export default function Header() {
@@ -23,11 +23,12 @@ export default function Header() {
       {isLoggedIn === true?
       <>
       <Button title='Profile' />
-      <Button title='Logout' />
+      <Button title='Log out' />
       </>
       :
       <>
-      <Button onPress={ toggleModal } title='Login' />
+      <Button onPress={ toggleModal } title='SignUp' />
+      <Button title='Login' />
       <View View style={styles.centeredView}>
         <Modal 
         visible = { isModalVisible } 
@@ -35,14 +36,13 @@ export default function Header() {
         transparent={true}>  
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
-            <LoginForm />
+            <SignupForm />
             <Button title='X' onPress={ toggleModal } onRequestClose={() => {
               setIsModalVisible(!isModalVisible);
             }}/>
             </View>
           </View>
         </Modal>
-      <Button title='Signup' />
       </View>
       </>
     }
@@ -58,12 +58,18 @@ export default function Header() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#AEC6CF',
-    alignItems: 'stretch',
-    // justifyContent: 'space-evenly',
-  },
+  // container: {
+  //   backgroundColor:'#F8F8F8',
+  //   justifyContent:'space-in',
+  //   alignItems:'baseline',
+  //   height: 60,
+  //   borderWidth:0,
+  //   shadowColor:'#F8F8F8',
+  //   shadowOffset:{ width:0, height:2 },
+  //   shadowOpacity:0.5,
+  //   elevation:2,
+  //   position: 'absolute'
+  // },
   centeredView: {
     flex: 1,
     justifyContent: "center",
