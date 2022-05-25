@@ -36,8 +36,7 @@ export default function Header() {
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
             <LoginForm />
-            <Button title='Submit' onPress={ toggleModal } onRequestClose={() => {
-              Alert.alert("Attempting to Login");
+            <Button title='X' onPress={ toggleModal } onRequestClose={() => {
               setIsModalVisible(!isModalVisible);
             }}/>
             </View>
