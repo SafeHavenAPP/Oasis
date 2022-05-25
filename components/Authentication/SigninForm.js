@@ -1,15 +1,14 @@
 import * as React from 'react';
 import { Text, View, TextInput, Button, StyleSheet} from 'react-native';
 
-export default function SignupForm({ toggleSignup }){
+export default function SigninForm({ toggleSignin }) {
 
   const [username, setUsername] = React.useState('')
-  const [fullName, setFullName] = React.useState('')
   const [password, setPassword] = React.useState('')
 
-  const handleSubmit = async () =>{
+  const handleSubmit = async () => {
     try {
-      fetch('https://oasis-server-app.herokuapp.com/auth/register', {
+      fetch('https://oasis-server-app.herokuapp.com/auth/sign_in', {
         method: 'post',
         mode: 'no-cors',
         headers: {
@@ -18,31 +17,26 @@ export default function SignupForm({ toggleSignup }){
         },
         body: JSON.stringify({
           username: username,
-          fullName: fullName,
           password: password
         })
       })
       .then((response) => response.json())
       .then(data => console.log(data))
       .catch(error => console.log(error))
-      toggleSignup();
+      toggleSignin();
     } catch(e){
       console.log(e);
     }
   }
-
-
-
   return (
     <View>
-      <Text> Oasis SignUp  </Text>
+      <Text> Oasis Sign In  </Text>
       <View>
-        <TextInput style={styles.input} onChangeText={setFullName}  placeholder="Enter Full Name" />
-        <TextInput style={styles.input} onChangeText={setUsername}  placeholder="Enter Username" />
+        <TextInput style={styles.input} onChangeText={setUsername}  placeholder="username" />
         <TextInput
           onChangeText={setPassword} 
           secureTextEntry={true}
-          placeholder="Enter Password"
+          placeholder="password"
           style={styles.input}
         />
         <Button title='Submit' onPress={handleSubmit} />

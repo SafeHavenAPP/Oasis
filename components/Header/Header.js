@@ -3,18 +3,21 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button, Modal } from 'react-native';
 // import ModalLogin from  '../Authentication/Modal.js'
 import SignupForm from '../Authentication/SignupForm.js'
+import SigninForm from '../Authentication/SigninForm.js';
 
 
 export default function Header() {
-  // const [modalShown, setModalShown] = React.useState(false);
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
-  const [isModalVisible, setIsModalVisible] = React.useState(false);
+  const [isSignupVisible, setIsSignupVisible] = React.useState(false);
+  const [isSigninVisible, setIsSigninVisible] = React.useState(false);
 
-  const toggleModal = () => {
-    console.log('HERE----------')
-    setIsModalVisible(!isModalVisible);
+  const toggleSignup = () => {
+    setIsSignupVisible(!isSignupVisible);
   };
   
+  const toggleSignin = () => {
+    setIsSigninVisible(!isSigninVisible);
+  };
 
 
   return (
@@ -27,19 +30,30 @@ export default function Header() {
       </>
       :
       <>
-      <Button onPress={ toggleModal } title='SignUp' />
-      <Button title='Login' />
+      <Button onPress={ toggleSignup } title='SignUp' />
       <View View style={styles.centeredView}>
         <Modal 
-        visible = { isModalVisible } 
+        visible = { isSignupVisible } 
         animationType="slide"
         transparent={true}>  
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
-            <SignupForm />
-            <Button title='X' onPress={ toggleModal } onRequestClose={() => {
-              setIsModalVisible(!isModalVisible);
-            }}/>
+            <Button title='X' onPress={ toggleSignup } />
+            <SignupForm toggleSignup={ toggleSignup } />
+            </View>
+          </View>
+        </Modal>
+      </View>
+      <Button onPress={ toggleSignin } title='Sign In' />
+      <View View style={styles.centeredView}>
+        <Modal 
+        visible = { isSigninVisible } 
+        animationType="slide"
+        transparent={true}>  
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+            <Button title='X' onPress={ toggleSignin } />
+            <SigninForm toggleSignin={ toggleSignin } />
             </View>
           </View>
         </Modal>
