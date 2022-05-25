@@ -16,69 +16,75 @@ export default function Header() {
   const toggleSignup = () => {
     setIsSignupVisible(!isSignupVisible);
   };
-  
+
   const toggleSignin = () => {
     console.log("Adreas is okay.");
     setIsSigninVisible(!isSigninVisible);
   };
 
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    setUser([]);
+  }
 
   return (
     <View style={styles.container}>
       {/* TODO: Conditionally render login/Logout buttons */}
-      {isLoggedIn === true?
-      <div style={styles.buttonView}>
-      <Button title='Profile' />
-      <Button title='Log out' />
-      </div>
-      :
-      <>
-        <Button onPress={ toggleSignin } title="Sign In" />
-      <Button onPress={ toggleSignup } title='SignUp' />
-      <View View style={styles.centeredView}>
-        <Modal 
-        visible = { isSignupVisible } 
-        animationType="slide"
-        transparent={true}>  
-          <View style={styles.centeredView}>
-            <View style={styles.modalView}>
-            <Button title='X' onPress={ toggleSignup } />
-            <SignupForm 
-              toggleSignup={ toggleSignup }
-              setUser={setUser}
-              user={user}
-              />
-            </View>
+      {isLoggedIn === true ?
+        <>
+          <Button title='Profile' />
+          <Button onPress={handleLogout} title='Log out' />
+        </>
+        :
+        <>
+          <View style={styles.buttonView}>
+            <Button onPress={toggleSignin} title="Sign In" />
+            <Button onPress={toggleSignup} title='Sign Up' />
           </View>
-        </Modal>
-      </View>
-      {/* <TouchableOpacity > */}
-      {/* </TouchableOpacity> */}
-      <View View style={styles.centeredView}>
-        <Modal 
-        visible = { isSigninVisible } 
-        animationType="slide"
-        transparent={true}>  
-          <View style={styles.centeredView}>
-            <View style={styles.modalView}>
-            <TouchableOpacity onPress={ toggleSignin } >
-              <Text>x</Text>
-            </TouchableOpacity>
-            <SigninForm 
-              toggleSignin={ toggleSignin }
-              isLoggedIn={isLoggedIn} 
-              setIsLoggedIn={setIsLoggedIn}
-              setUser={setUser}
-              user={user}
-              />
-            </View>
+          <View View style={styles.centeredView}>
+            <Modal
+              visible={isSignupVisible}
+              animationType="slide"
+              transparent={true}>
+              <View style={styles.centeredView}>
+                <View style={styles.modalView}>
+                  <Button title='X' onPress={toggleSignup} />
+                  <SignupForm
+                    toggleSignup={toggleSignup}
+                    setUser={setUser}
+                    user={user}
+                  />
+                </View>
+              </View>
+            </Modal>
           </View>
-        </Modal>
-      </View>
-      </>
-    }
+          {/* <TouchableOpacity > */}
+          {/* </TouchableOpacity> */}
+          <View View style={styles.centeredView}>
+            <Modal
+              visible={isSigninVisible}
+              animationType="slide"
+              transparent={true}>
+              <View style={styles.centeredView}>
+                <View style={styles.modalView}>
+                  <TouchableOpacity onPress={toggleSignin} >
+                    <Text>x</Text>
+                  </TouchableOpacity>
+                  <SigninForm
+                    toggleSignin={toggleSignin}
+                    isLoggedIn={isLoggedIn}
+                    setIsLoggedIn={setIsLoggedIn}
+                    setUser={setUser}
+                    user={user}
+                  />
+                </View>
+              </View>
+            </Modal>
+          </View>
+        </>
+      }
 
-   </View>
+    </View>
   );
 }
 
@@ -117,7 +123,10 @@ const styles = StyleSheet.create({
     elevation: 5
   },
   buttonView: {
-    flex: 1,
-    justifyContent: 'space-evenly', 
+    display: 'flex',
+    width: 375,
+    margin: 'auto',
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
   }
 });
