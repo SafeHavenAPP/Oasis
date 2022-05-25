@@ -35,19 +35,22 @@ export default function Home({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
         <View style={styles.container}>
-        <StatusBar style='auto' />
+        <StatusBar style='auto' barStyle='#fff'/>
       </View>
         <View>
           <MapView style={styles.map} />
         </View>
-      <Button  color="#841584" title='Profile' onPress={()=> navigation.navigate('Profile')}/>
+      <Button  
+      color="#841584" 
+      title='Profile' 
+      onPress={()=> navigation.navigate('Profile')}/>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 3,
+    flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',

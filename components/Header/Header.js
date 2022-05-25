@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button, Modal } from 'react-native';
+import { StyleSheet, Text, View, Button, Modal, TouchableOpacity } from 'react-native';
 // import ModalLogin from  '../Authentication/Modal.js'
 import SignupForm from '../Authentication/SignupForm.js'
 import SigninForm from '../Authentication/SigninForm.js';
@@ -18,6 +18,7 @@ export default function Header() {
   };
   
   const toggleSignin = () => {
+    console.log("Adreas is okay.");
     setIsSigninVisible(!isSigninVisible);
   };
 
@@ -26,12 +27,13 @@ export default function Header() {
     <View style={styles.container}>
       {/* TODO: Conditionally render login/Logout buttons */}
       {isLoggedIn === true?
-      <>
+      <div style={styles.buttonView}>
       <Button title='Profile' />
       <Button title='Log out' />
-      </>
+      </div>
       :
       <>
+        <Button onPress={ toggleSignin } title="Sign In" />
       <Button onPress={ toggleSignup } title='SignUp' />
       <View View style={styles.centeredView}>
         <Modal 
@@ -50,7 +52,8 @@ export default function Header() {
           </View>
         </Modal>
       </View>
-      <Button onPress={ toggleSignin } title='Sign In' />
+      {/* <TouchableOpacity > */}
+      {/* </TouchableOpacity> */}
       <View View style={styles.centeredView}>
         <Modal 
         visible = { isSigninVisible } 
@@ -58,7 +61,9 @@ export default function Header() {
         transparent={true}>  
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
-            <Button title='X' onPress={ toggleSignin } />
+            <TouchableOpacity onPress={ toggleSignin } >
+              <Text>x</Text>
+            </TouchableOpacity>
             <SigninForm 
               toggleSignin={ toggleSignin }
               isLoggedIn={isLoggedIn} 
@@ -73,12 +78,6 @@ export default function Header() {
       </>
     }
 
-    {/* {modalShown === true ?
-    <>
-      <ModalLogin />
-    </>
-    :null} */}
-
    </View>
   );
 }
@@ -86,10 +85,10 @@ export default function Header() {
 const styles = StyleSheet.create({
   // container: {
   //   backgroundColor:'#F8F8F8',
-  //   justifyContent:'space-in',
-  //   alignItems:'baseline',
-  //   height: 60,
-  //   borderWidth:0,
+  //   justifyContent:'space-around',
+  //   alignItems:'center',
+  //   height: 100,
+  //   width: 400,
   //   shadowColor:'#F8F8F8',
   //   shadowOffset:{ width:0, height:2 },
   //   shadowOpacity:0.5,
@@ -117,4 +116,8 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5
   },
+  buttonView: {
+    flex: 1,
+    justifyContent: 'space-evenly', 
+  }
 });
