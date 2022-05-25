@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Text, View, TextInput, Button, StyleSheet} from 'react-native';
 
-export default function SigninForm({ toggleSignin }) {
+export default function SigninForm({ toggleSignin, setIsLoggedIn, isLoggedIn, user, setUser }) {
 
   const [username, setUsername] = React.useState('')
   const [password, setPassword] = React.useState('')
@@ -21,8 +21,13 @@ export default function SigninForm({ toggleSignin }) {
         })
       })
       .then((response) => response.json())
-      .then(data => console.log(data))
+      .then(data => {
+      console.log(data) 
+      setUser([...user, data])
+      })
+      .then(() => console.log('user',user))
       .catch(error => console.log(error))
+      setIsLoggedIn(!isLoggedIn)
       toggleSignin();
     } catch(e){
       console.log(e);

@@ -7,7 +7,9 @@ import SigninForm from '../Authentication/SigninForm.js';
 
 
 export default function Header() {
+
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  const [user, setUser] = React.useState([]);
   const [isSignupVisible, setIsSignupVisible] = React.useState(false);
   const [isSigninVisible, setIsSigninVisible] = React.useState(false);
 
@@ -39,7 +41,11 @@ export default function Header() {
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
             <Button title='X' onPress={ toggleSignup } />
-            <SignupForm toggleSignup={ toggleSignup } />
+            <SignupForm 
+              toggleSignup={ toggleSignup }
+              setUser={setUser}
+              user={user}
+              />
             </View>
           </View>
         </Modal>
@@ -53,7 +59,13 @@ export default function Header() {
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
             <Button title='X' onPress={ toggleSignin } />
-            <SigninForm toggleSignin={ toggleSignin } />
+            <SigninForm 
+              toggleSignin={ toggleSignin }
+              isLoggedIn={isLoggedIn} 
+              setIsLoggedIn={setIsLoggedIn}
+              setUser={setUser}
+              user={user}
+              />
             </View>
           </View>
         </Modal>

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Text, View, TextInput, Button, StyleSheet} from 'react-native';
 
-export default function SignupForm({ toggleSignup }){
+export default function SignupForm({ toggleSignup, setUser, user }){
 
   const [username, setUsername] = React.useState('')
   const [fullName, setFullName] = React.useState('')
@@ -9,6 +9,7 @@ export default function SignupForm({ toggleSignup }){
 
   const handleSubmit = async () =>{
     try {
+      let fetchedUser;
       fetch('https://oasis-server-app.herokuapp.com/auth/register', {
         method: 'post',
         mode: 'no-cors',
@@ -23,7 +24,11 @@ export default function SignupForm({ toggleSignup }){
         })
       })
       .then((response) => response.json())
-      .then(data => console.log(data))
+      .then(data => {
+      setUser([data]) 
+      console.log(data)
+      })  
+      // .then(() => console.log('line 28',user))
       .catch(error => console.log(error))
       toggleSignup();
     } catch(e){
