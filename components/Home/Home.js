@@ -8,32 +8,23 @@ import {
   SafeAreaView,
   Dimensions,
 } from "react-native";
-import { NativeBaseProvider } from "native-base";
+// import { NativeBaseProvider } from "native-base";
 import { EventRegister } from "react-native-event-listeners";
-import YelpLocations from "../searchYelp.js/YelpLocations";
+// import YelpLocations from "../searchYelp.js/YelpLocations";
 
-export default function Home({ navigation }) {
+export default function Home({ navigation, isLoggedIn }) {
   const [showProfile, setShowProfile] = React.useState(false);
 
-  React.useEffect(() => {
-    let eventListener = EventRegister.addEventListener("loggedIn", (data) => {
-      setShowProfile(data);
-    });
-    return () => {
-      EventRegister.removeEventListener(eventListener);
-    };
-  },[]);
-  
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>
         <StatusBar style="auto" barStyle="#fff" />
       </View>
-      <NativeBaseProvider>
-        <YelpLocations />
-      </NativeBaseProvider>
+      {/* <NativeBaseProvider> */}
+      {/* <YelpLocations /> */}
+      {/* </NativeBaseProvider> */}
       <View>
-        {showProfile === true ? (
+        {isLoggedIn === true ? (
           <Button
             color="#841584"
             title="Profile"

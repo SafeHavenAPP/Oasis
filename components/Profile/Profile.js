@@ -33,9 +33,6 @@ export default function Profile() {
         .then((data) => {
           setLocations(data)
         })
-        // .then(() => {
-        //   console.log(locations)
-        // })
         .catch((error) => console.log(error));
     } catch (e) {
       console.log(e);
