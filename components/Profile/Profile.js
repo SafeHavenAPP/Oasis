@@ -33,9 +33,9 @@ export default function Profile() {
         .then((data) => {
           setLocations(data)
         })
-        .then(() => {
-          console.log(locations)
-        })
+        // .then(() => {
+        //   console.log(locations)
+        // })
         .catch((error) => console.log(error));
     } catch (e) {
       console.log(e);
@@ -116,8 +116,15 @@ export default function Profile() {
                     <Text>Status:  {location.status}</Text>
                     <Text>Username:  {location.username}</Text>
                     <View style={styles.boxButtonView}>
-                      <Button title='Update A Location' onPress={() => handleUpdate(location)} />
-                      <Button title='Delete A Location' onPress={() => handleDelete(location._id)} />
+                      <Button 
+                        title='Update A Location' 
+                        onPress={() => handleUpdate(location)}
+                      />
+                      <Button 
+                        title='Delete A Location' 
+                        onPress={() => handleDelete(location._id)}
+                        color='orange'
+                      />
                     </View>
                   </Box>
                 )) : null

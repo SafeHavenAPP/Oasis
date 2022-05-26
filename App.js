@@ -6,7 +6,6 @@ import Profile from './components/Profile/Profile.js';
 import Header from './components/Header/Header.js';
 
 export default function App() {
-
   const Stack = createNativeStackNavigator();
 
   return (
@@ -19,8 +18,9 @@ export default function App() {
       >
         <Stack.Screen 
           name='Home' 
-          component={Home} 
+          component={Home}
           />
+          
         
         <Stack.Screen 
         name='Profile' 

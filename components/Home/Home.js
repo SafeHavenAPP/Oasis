@@ -20,8 +20,8 @@ export default function Home({ navigation }) {
     return () => {
       EventRegister.removeEventListener(eventListener);
     };
-  });
-
+  },[]);
+  
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>
