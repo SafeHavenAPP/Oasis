@@ -2,10 +2,24 @@ import * as React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import MapView from 'react-native-maps';
 import { StyleSheet, Button, View, SafeAreaView, Dimensions } from 'react-native';
+import { EventRegister } from 'react-native-event-listeners';
 // import axios from 'axios';
 // import { YellowBox } from 'react-native-web';
 
 export default function Home({ navigation }) {
+
+  const [showProfile, setShowProfile] = React.useState(false);
+
+  React.useEffect(() => {
+    console.log('profile', showProfile)
+    let eventListener = EventRegister.addEventListener('loggedIn', (data) => {
+      setShowProfile(data)
+      console.log(data)
+    });
+    return () => {
+      EventRegister.removeEventListener(eventListener)
+    }
+  })
 
   // async function yelpMap(){
   // const config = {
@@ -31,19 +45,29 @@ export default function Home({ navigation }) {
   // }
 
 
-  
+  // React.useEffect(() => {
+  //   console.log('home',JSON.stringify(isLoggedIn))
+  // }, [])
   return (
     <SafeAreaView style={styles.container}>
-        <View style={styles.container}>
-        <StatusBar style='auto' barStyle='#fff'/>
+      <View style={styles.container}>
+        <StatusBar style='auto' barStyle='#fff' />
       </View>
-        <View>
-          <MapView style={styles.map} />
-        </View>
-      <Button  
-      color="#841584" 
-      title='Profile' 
-      onPress={()=> navigation.navigate('Profile')}/>
+      <View>
+        {
+          showProfile === true ?
+        <Button
+          color="#841584"
+          title='Profile'
+          onPress={() => navigation.navigate('Profile')} />
+          : null
+        }
+
+
+      </View>
+      <View>
+        <MapView style={styles.map} />
+      </View>
     </SafeAreaView>
   );
 }
@@ -57,6 +81,6 @@ const styles = StyleSheet.create({
   },
   map: {
     width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height,
+    height: 600,
   }
 });

@@ -11,6 +11,7 @@ import Header from './components/Header/Header.js';
 
 export default function App() {
 
+  // const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const Stack = createNativeStackNavigator();
   // const Drawer = createDrawerNavigator();
 
@@ -19,17 +20,21 @@ export default function App() {
       <Stack.Navigator 
       initialRouteName="Home"
       screenOptions={{headerTitle: () => (
-          <Header />
+          <Header
+            // isLoggedIn={isLoggedIn}
+            // setIsLoggedIn={setIsLoggedIn}
+          />
       )}} 
       >
         <Stack.Screen 
           name='Home' 
-          component={Home}
+          component={Home} 
           />
+        
 
         <Stack.Screen 
         name='Profile' 
-        component={Profile} 
+        component={Profile}
         />
 
       </Stack.Navigator>

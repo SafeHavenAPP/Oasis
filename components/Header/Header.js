@@ -13,12 +13,12 @@ export default function Header() {
   const [isSignupVisible, setIsSignupVisible] = React.useState(false);
   const [isSigninVisible, setIsSigninVisible] = React.useState(false);
 
+ 
   const toggleSignup = () => {
     setIsSignupVisible(!isSignupVisible);
   };
 
   const toggleSignin = () => {
-    console.log("Adreas is okay.");
     setIsSigninVisible(!isSigninVisible);
   };
 
@@ -29,16 +29,22 @@ export default function Header() {
 
   return (
     <View style={styles.container}>
-      {/* TODO: Conditionally render login/Logout buttons */}
+
       {isLoggedIn === true ?
         <>
-          <Button title='Profile' />
-          <Button onPress={handleLogout} title='Log out' />
+          <View style={styles.buttonView}>
+            <Button onPress={handleLogout} title='Log out' />
+          </View>
         </>
         :
         <>
           <View style={styles.buttonView}>
-            <Button onPress={toggleSignin} title="Sign In" />
+            <Button 
+              onPress={toggleSignin} 
+              title="Sign In" 
+              value={isLoggedIn}
+              
+              />
             <Button onPress={toggleSignup} title='Sign Up' />
           </View>
           <View View style={styles.centeredView}>
@@ -58,8 +64,7 @@ export default function Header() {
               </View>
             </Modal>
           </View>
-          {/* <TouchableOpacity > */}
-          {/* </TouchableOpacity> */}
+
           <View View style={styles.centeredView}>
             <Modal
               visible={isSigninVisible}
