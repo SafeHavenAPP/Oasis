@@ -3,14 +3,21 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, Modal, Button } from "react-native";
 import { NativeBaseProvider, Box, ScrollView } from 'native-base';
 import LocationForm from "./locationForm/LocationForm.js";
+import UpdateForm from "./UpdateForm.js";
 
 export default function Profile() {
   const [showCreate, setShowCreate] = React.useState([false]);
+  const [showUpdate, setShowUpdate] = React.useState([false]);
   const [locations, setLocations] = React.useState(null);
+  const [locationToUpdate, setLocationToUpdate] = React.useState({})
 
   const toggleCreate = () => {
     setShowCreate(!showCreate);
   };
+
+  const toggleUpdate = () => {
+    setShowUpdate(!showUpdate);
+  }
 
   function fetchData() {
     try {
@@ -37,7 +44,7 @@ export default function Profile() {
 
   // This is called at the "Delete A Location" button.  It re renders the locations as well
   const handleDelete = (id) => {
-    
+
     try {
       fetch(`https://oasis-server-app.herokuapp.com/locations/${id}`, {
         method: "delete",
@@ -49,7 +56,7 @@ export default function Profile() {
       })
         .then((response) => response.json())
         .then((data) => {
-        console.log(data)
+          console.log(data)
         })
         .then(() => {
           // This rerenders the data after deletion.  
@@ -62,27 +69,8 @@ export default function Profile() {
   }
 
   const handleUpdate = (location) => {
-    try {
-      fetch(`https://oasis-server-app.herokuapp.com/locations/${location._id}`, {
-        method: "put",
-        mode: "no-cors",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      })
-        .then((response) => response.json())
-        .then((data) => {
-        console.log(data)
-        })
-        .then(() => {
-          // This rerenders the data after deletion.  
-          fetchData();
-        })
-        .catch((error) => console.log(error));
-    } catch (e) {
-      console.log(e);
-    }
+    toggleUpdate();
+    setLocationToUpdate(location)
   }
 
   React.useEffect(() => {
@@ -98,8 +86,10 @@ export default function Profile() {
           <Modal visible={showCreate} animationType="slide" transparent={true}>
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
-                <Button title="X" onPress={toggleCreate} />
-                <LocationForm 
+
+                <Button title="Close" onPress={toggleCreate} color='crimson' />
+
+                <LocationForm
                   fetchData={fetchData}
                   toggleCreate={toggleCreate}
                 />
@@ -125,14 +115,30 @@ export default function Profile() {
                     <Text>Location Address: {location.address}</Text>
                     <Text>Status:  {location.status}</Text>
                     <Text>Username:  {location.username}</Text>
-                    <Button title='Update A Location' />
-                    <Button title='Delete A Location' onPress={() => handleDelete(location._id)} />
+                    <View style={styles.boxButtonView}>
+                      <Button title='Update A Location' onPress={() => handleUpdate(location)} />
+                      <Button title='Delete A Location' onPress={() => handleDelete(location._id)} />
+                    </View>
                   </Box>
                 )) : null
             }
           </ScrollView>
         </View>
       </View>
+      <Modal visible={showUpdate} animationType="slide" transparent={true}>
+            <View style={styles.centeredView}>
+              <View style={styles.modalView}>
+
+                <Button title="Close" onPress={toggleUpdate} color='crimson' />
+
+                <UpdateForm
+                  fetchData={fetchData}
+                  toggleUpdate={toggleUpdate}
+                  locationToUpdate={locationToUpdate}
+                />
+              </View>
+            </View>
+          </Modal>
     </NativeBaseProvider>
   );
 }
@@ -168,14 +174,15 @@ const styles = StyleSheet.create({
   },
   buttonView: {
     display: "flex",
-    width: 375,
+    width: 300,
     margin: "auto",
     flexDirection: "row",
     justifyContent: "space-evenly",
   },
-  button: {
+  boxButtonView: {
     flex: 1,
-    marginBottom: 20,
-    paddingBottom: 20
-  }
+    flexDirection: 'column',
+    justifyContent: 'space-evenly'
+  },
+
 });

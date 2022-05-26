@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 
 export default function LocationForm({ fetchData, toggleCreate }) {
 
@@ -38,6 +38,7 @@ export default function LocationForm({ fetchData, toggleCreate }) {
 
   return (
     <View>
+      <Text style={styles.header}>Create A Location</Text>
       <TextInput style={styles.input} placeholder= "Location Name" onChangeText={setLocationName} />
       <TextInput style={styles.input} placeholder= "Address" onChangeText={setAddress} />
       <TextInput style={styles.input} placeholder= "Status" onChangeText={setStatus} />
@@ -56,4 +57,8 @@ const styles = StyleSheet.create({
     padding: 10,
     color: 'black'
   },
+  header: {
+    alignSelf: 'center',
+    fontSize: 20
+  }
 });
