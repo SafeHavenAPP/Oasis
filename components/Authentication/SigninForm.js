@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text, View, TextInput,  StyleSheet, Switch} from 'react-native';
+import { Text, View, TextInput,  StyleSheet, Switch, Alert} from 'react-native';
 import { EventRegister } from 'react-native-event-listeners';
 import jwt_decode from 'jwt-decode'
 
@@ -25,10 +25,14 @@ export default function SigninForm({ toggleSignin, setIsLoggedIn, isLoggedIn, us
       })
       .then((response) => response.json())
       .then(data => {
-        setUser([...user, jwt_decode(data.token)])
+        if(data.token){
+          setUser([...user, jwt_decode(data.token)])
+          setIsLoggedIn(!isLoggedIn)
+        } else{
+          Alert.alert(data)
+        }
       })
       .catch(error => console.log(error))
-      setIsLoggedIn(!isLoggedIn)
       toggleSignin();
     } catch(e){
       console.log(e);

@@ -5,7 +5,7 @@ import { NativeBaseProvider, Box, ScrollView } from "native-base";
 import LocationForm from "./locationForm/LocationForm.js";
 import UpdateForm from "./UpdateForm.js";
 
-export default function Profile({ locations, setLocations }) {
+export default function Profile({ locations, setLocations, isLoggedIn, navigation, user }) {
   const [showCreate, setShowCreate] = React.useState([false]);
   const [showUpdate, setShowUpdate] = React.useState([false]);
   const [locationToUpdate, setLocationToUpdate] = React.useState({});
@@ -71,27 +71,37 @@ export default function Profile({ locations, setLocations }) {
   React.useEffect(() => {
     fetchData();
   }, []);
+  
+  React.useEffect(() => {
+    if(isLoggedIn === false){
+      navigation.navigate('Home');
+    }
+  }, [isLoggedIn])
 
   return (
     <NativeBaseProvider>
       <View style={styles.container}>
         <StatusBar style="auto" />
+      { isLoggedIn ? 
+        <>
         <Button title="Create A Location" onPress={toggleCreate} />
-        <View View style={styles.centeredView}>
+        {/* <View View style={styles.centeredView}> */}
           <Modal visible={showCreate} animationType="slide" transparent={true}>
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
                 <Button title="Close" onPress={toggleCreate} color="crimson" />
-
                 <LocationForm
                   fetchData={fetchData}
                   toggleCreate={toggleCreate}
+                  user={user}
                 />
               </View>
             </View>
           </Modal>
+          </> 
+          : null}
           <ScrollView>
-            {locations
+            {locations && isLoggedIn
               ? locations.map((location) => (
                   <Box
                     key={location._id}
@@ -106,7 +116,7 @@ export default function Profile({ locations, setLocations }) {
                     <Text>Location Name: {location.locationName}</Text>
                     <Text>Location Address: {location.address}</Text>
                     <Text>Status: {location.status}</Text>
-                    <Text>Username: {location.username}</Text>
+                    <Text>Created By: {location.username}</Text>
                     <View style={styles.boxButtonView}>
                       <Button
                         title="Update A Location"
@@ -123,7 +133,7 @@ export default function Profile({ locations, setLocations }) {
               : null}
           </ScrollView>
         </View>
-      </View>
+      {/* </View> */}
       <Modal visible={showUpdate} animationType="slide" transparent={true}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>

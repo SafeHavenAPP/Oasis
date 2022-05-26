@@ -1,6 +1,5 @@
 import * as React from "react";
 import { StatusBar } from "expo-status-bar";
-import MapView from "react-native-maps";
 import { NativeBaseProvider, Box, ScrollView } from "native-base";
 import {
   StyleSheet,
@@ -97,8 +96,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  map: {
-    width: Dimensions.get("window").width,
-    height: 600,
-  },
+  // map: {
+  //   width: Dimensions.get("window").width,
+  //   height: 600,
+  // },
 });

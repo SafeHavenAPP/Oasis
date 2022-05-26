@@ -1,15 +1,14 @@
 import * as React from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
 
-export default function LocationForm({ fetchData, toggleCreate }) {
+export default function LocationForm({ fetchData, toggleCreate, user }) {
 
   const [locationName, setLocationName] = React.useState('')
   const [address, setAddress] = React.useState('')
   const [status, setStatus] = React.useState('')
-  const [username, setUsername] = React.useState('')
-
-  // Called fetchData in here to render the data real time after creation
+   // Called fetchData in here to render the data real time after creation
   const handleSubmit = async () => {
+    if(locationName && address){
     try {
       fetch('https://oasis-server-app.herokuapp.com/locations', {
         method: 'post',
@@ -22,7 +21,7 @@ export default function LocationForm({ fetchData, toggleCreate }) {
           locationName: locationName,
           address: address,
           status: status,
-          username: username
+          username: user.username
         })
       })
       .then((response) => response.json())
@@ -34,16 +33,19 @@ export default function LocationForm({ fetchData, toggleCreate }) {
     } catch(e){
       console.log(e);
     }
+  } else {
+    Alert.alert('Must enter a location name and address!')
+  }
   }
 
   return (
     <View>
       <Text style={styles.header}>Create A Location</Text>
-      <TextInput style={styles.input} placeholder= "Location Name" onChangeText={setLocationName} />
+      <TextInput textContentType='addressCity' style={styles.input} placeholder= "Location Name" onChangeText={setLocationName} />
       <TextInput style={styles.input} placeholder= "Address" onChangeText={setAddress} />
-      <TextInput style={styles.input} placeholder= "Status" onChangeText={setStatus} />
-      <TextInput style={styles.input} placeholder= "Username" onChangeText={setUsername} />
-      <Button title="Create" onPress={handleSubmit} />
+      {/* TODO: Update to switch */}
+      <TextInput style={styles.input} placeholder= "Open-to-all Status" onChangeText={setStatus} />
+      <Button title="Add Location" onPress={handleSubmit} />
     </View>
   )
 
