@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { Text, View, TextInput,  StyleSheet, Switch} from 'react-native';
 import { EventRegister } from 'react-native-event-listeners';
+import jwt_decode from 'jwt-decode'
+
 
 export default function SigninForm({ toggleSignin, setIsLoggedIn, isLoggedIn, user, setUser }) {
 
   const [username, setUsername] = React.useState('')
   const [password, setPassword] = React.useState('')
-
-
   
   const handleSubmit = async () => {
     try {
@@ -25,7 +25,7 @@ export default function SigninForm({ toggleSignin, setIsLoggedIn, isLoggedIn, us
       })
       .then((response) => response.json())
       .then(data => {
-        setUser([...user, data])
+        setUser([...user, jwt_decode(data.token)])
       })
       .catch(error => console.log(error))
       setIsLoggedIn(!isLoggedIn)
@@ -34,10 +34,6 @@ export default function SigninForm({ toggleSignin, setIsLoggedIn, isLoggedIn, us
       console.log(e);
     }
   }
-
-  // React.useEffect(() => {
-  // }, [isLoggedIn])
-  //   console.log(isLoggedIn);
   
   return (
     <View>
