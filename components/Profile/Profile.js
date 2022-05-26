@@ -102,7 +102,7 @@ export default function Profile({ locations, setLocations, isLoggedIn, navigatio
           : null}
           <ScrollView>
             {locations && isLoggedIn
-              ? locations.map((location) => (
+              ? locations.filter(location=> location.userID === user[0]._id).map((location) => (
                   <Box
                     key={location._id}
                     alignItems="center"

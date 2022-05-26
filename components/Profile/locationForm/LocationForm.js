@@ -6,10 +6,15 @@ export default function LocationForm({ fetchData, toggleCreate, user }) {
   const [locationName, setLocationName] = React.useState('')
   const [address, setAddress] = React.useState('')
   const [status, setStatus] = React.useState('')
+
+  const username = user[0].username
+  const userID = user[0]._id
+
    // Called fetchData in here to render the data real time after creation
   const handleSubmit = async () => {
     if(locationName && address){
     try {
+      console.log("this is the location user", user)
       fetch('https://oasis-server-app.herokuapp.com/locations', {
         method: 'post',
         mode: 'no-cors',
@@ -21,7 +26,8 @@ export default function LocationForm({ fetchData, toggleCreate, user }) {
           locationName: locationName,
           address: address,
           status: status,
-          username: user.username
+          username: username,
+          userID: userID
         })
       })
       .then((response) => response.json())
