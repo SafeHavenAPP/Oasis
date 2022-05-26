@@ -1,7 +1,5 @@
 import * as React from 'react';
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button, Modal, TouchableOpacity } from 'react-native';
-// import ModalLogin from  '../Authentication/Modal.js'
 import SignupForm from '../Authentication/SignupForm.js'
 import SigninForm from '../Authentication/SigninForm.js';
 
@@ -94,18 +92,6 @@ export default function Header() {
 }
 
 const styles = StyleSheet.create({
-  // container: {
-  //   backgroundColor:'#F8F8F8',
-  //   justifyContent:'space-around',
-  //   alignItems:'center',
-  //   height: 100,
-  //   width: 400,
-  //   shadowColor:'#F8F8F8',
-  //   shadowOffset:{ width:0, height:2 },
-  //   shadowOpacity:0.5,
-  //   elevation:2,
-  //   position: 'absolute'
-  // },
   centeredView: {
     flex: 1,
     justifyContent: "center",

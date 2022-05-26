@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text, View, TextInput, Button, StyleSheet, Switch} from 'react-native';
+import { Text, View, TextInput,  StyleSheet, Switch} from 'react-native';
 import { EventRegister } from 'react-native-event-listeners';
 
 export default function SigninForm({ toggleSignin, setIsLoggedIn, isLoggedIn, user, setUser }) {
@@ -23,10 +23,8 @@ export default function SigninForm({ toggleSignin, setIsLoggedIn, isLoggedIn, us
       })
       .then((response) => response.json())
       .then(data => {
-      console.log(data) 
       setUser([...user, data])
     })
-    .then(() => console.log('user',user))
     .catch(error => console.log(error))
     setIsLoggedIn(!isLoggedIn)
     toggleSignin();
