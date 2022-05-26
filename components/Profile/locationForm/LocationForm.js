@@ -1,13 +1,14 @@
 import * as React from 'react';
 import { View, TextInput, Button, StyleSheet } from 'react-native';
 
-export default function LocationForm({}) {
+export default function LocationForm({ fetchData, toggleCreate }) {
 
   const [locationName, setLocationName] = React.useState('')
   const [address, setAddress] = React.useState('')
   const [status, setStatus] = React.useState('')
   const [username, setUsername] = React.useState('')
 
+  // Called fetchData in here to render the data real time after creation
   const handleSubmit = async () => {
     try {
       fetch('https://oasis-server-app.herokuapp.com/locations', {
@@ -25,6 +26,10 @@ export default function LocationForm({}) {
         })
       })
       .then((response) => response.json())
+      .then(() => {
+        fetchData();
+        toggleCreate();
+      })
     .catch(error => console.log(error))
     } catch(e){
       console.log(e);

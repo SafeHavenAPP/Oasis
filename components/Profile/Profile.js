@@ -1,54 +1,139 @@
 import * as React from "react";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View, Modal, Button } from "react-native";
+import { StyleSheet, Text, View, Modal, Button } from "react-native";
+import { NativeBaseProvider, Box, ScrollView } from 'native-base';
 import LocationForm from "./locationForm/LocationForm.js";
 
 export default function Profile() {
-  const [showModal, setShowModal] = React.useState([false]);
-  const [locations, setLocations] = React.useState([]);
+  const [showCreate, setShowCreate] = React.useState([false]);
+  const [locations, setLocations] = React.useState(null);
 
-  const toggleModal = () => {
-    setShowModal(!showModal);
+  const toggleCreate = () => {
+    setShowCreate(!showCreate);
   };
 
-  React.useEffect(() => {
-    function fetchData() {
-      try {
-        fetch("https://oasis-server-app.herokuapp.com/locations", {
-          method: "get",
-          mode: "no-cors",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
+  function fetchData() {
+    try {
+      fetch("https://oasis-server-app.herokuapp.com/locations", {
+        method: "get",
+        mode: "no-cors",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          setLocations(data)
         })
-          .then((response) => response.json())
-          .then((data) => {
-            setLocations([...locations, data])
-          })
-          .catch((error) => console.log(error));
-      } catch (e) {
-        console.log(e);
-      }
+        .then(() => {
+          console.log(locations)
+        })
+        .catch((error) => console.log(error));
+    } catch (e) {
+      console.log(e);
     }
+  }
+
+  // This is called at the "Delete A Location" button.  It re renders the locations as well
+  const handleDelete = (id) => {
+    
+    try {
+      fetch(`https://oasis-server-app.herokuapp.com/locations/${id}`, {
+        method: "delete",
+        mode: "no-cors",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+        console.log(data)
+        })
+        .then(() => {
+          // This rerenders the data after deletion.  
+          fetchData();
+        })
+        .catch((error) => console.log(error));
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  const handleUpdate = (location) => {
+    try {
+      fetch(`https://oasis-server-app.herokuapp.com/locations/${location._id}`, {
+        method: "put",
+        mode: "no-cors",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+        console.log(data)
+        })
+        .then(() => {
+          // This rerenders the data after deletion.  
+          fetchData();
+        })
+        .catch((error) => console.log(error));
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  React.useEffect(() => {
     fetchData()
   }, []);
 
   return (
-    <View style={styles.container}>
-      <StatusBar style="auto" />
-      <Button title="Create A Location" onPress={toggleModal} />
-      <View View style={styles.centeredView}>
-        <Modal visible={showModal} animationType="slide" transparent={true}>
-          <View style={styles.centeredView}>
-            <View style={styles.modalView}>
-              <Button title="X" onPress={toggleModal} />
-              <LocationForm />
+    <NativeBaseProvider>
+      <View style={styles.container}>
+        <StatusBar style="auto" />
+        <Button title="Create A Location" onPress={toggleCreate} />
+        <View View style={styles.centeredView}>
+          <Modal visible={showCreate} animationType="slide" transparent={true}>
+            <View style={styles.centeredView}>
+              <View style={styles.modalView}>
+                <Button title="X" onPress={toggleCreate} />
+                <LocationForm 
+                  fetchData={fetchData}
+                  toggleCreate={toggleCreate}
+                />
+              </View>
             </View>
-          </View>
-        </Modal>
+          </Modal>
+          <ScrollView>
+            {
+              locations ?
+                locations.map(location => (
+
+                  <Box
+                    key={location._id}
+                    alignItems='center'
+                    rounded='lg'
+                    borderWidth='5'
+                    borderColor='gray.500'
+                    marginBottom={5}
+                    padding={3}
+                    height={250}
+                  >
+                    <Text>Location Name: {location.locationName}</Text>
+                    <Text>Location Address: {location.address}</Text>
+                    <Text>Status:  {location.status}</Text>
+                    <Text>Username:  {location.username}</Text>
+                    <Button title='Update A Location' />
+                    <Button title='Delete A Location' onPress={() => handleDelete(location._id)} />
+                  </Box>
+                )) : null
+            }
+          </ScrollView>
+        </View>
       </View>
-    </View>
+    </NativeBaseProvider>
   );
 }
 
@@ -58,6 +143,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+    paddingTop: 20
   },
   centeredView: {
     flex: 1,
@@ -87,4 +173,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-evenly",
   },
+  button: {
+    flex: 1,
+    marginBottom: 20,
+    paddingBottom: 20
+  }
 });
