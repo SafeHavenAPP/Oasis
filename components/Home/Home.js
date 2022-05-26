@@ -8,7 +8,9 @@ import {
   SafeAreaView,
   Dimensions,
 } from "react-native";
+import { NativeBaseProvider } from "native-base";
 import { EventRegister } from "react-native-event-listeners";
+import YelpLocations from "../searchYelp.js/YelpLocations";
 
 export default function Home({ navigation }) {
   const [showProfile, setShowProfile] = React.useState(false);
@@ -27,6 +29,9 @@ export default function Home({ navigation }) {
       <View style={styles.container}>
         <StatusBar style="auto" barStyle="#fff" />
       </View>
+      <NativeBaseProvider>
+        <YelpLocations />
+      </NativeBaseProvider>
       <View>
         {showProfile === true ? (
           <Button
