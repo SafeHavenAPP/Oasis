@@ -7,7 +7,15 @@ import Header from "./components/Header/Header.js";
 
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  const [user, setUser] = React.useState([]);
   const Stack = createNativeStackNavigator();
+  const [locations, setLocations] = React.useState(null);
+
+  //TODO: delete after user state is handled properly
+  React.useEffect(() => {
+    console.log("Contains User Info", user);
+    console.log("State of Login", isLoggedIn);
+  }, [user, isLoggedIn]);
 
   return (
     <NavigationContainer>
@@ -15,15 +23,38 @@ export default function App() {
         initialRouteName="Home"
         screenOptions={{
           headerTitle: () => (
-            <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+            <Header
+              user={user}
+              setUser={setUser}
+              isLoggedIn={isLoggedIn}
+              setIsLoggedIn={setIsLoggedIn}
+            />
           ),
         }}
       >
         <Stack.Screen name="Home">
-          {(props) => <Home {...props} isLoggedIn={isLoggedIn} />}
+          {(props) => (
+            <Home
+              {...props}
+              locations={locations}
+              setLocations={setLocations}
+              user={user}
+              isLoggedIn={isLoggedIn}
+            />
+          )}
         </Stack.Screen>
 
-        <Stack.Screen name="Profile" component={Profile} />
+        <Stack.Screen name="Profile">
+          {(props) => (
+            <Profile
+              {...props}
+              locations={locations}
+              setLocations={setLocations}
+              user={user}
+              isLoggedIn={isLoggedIn}
+            />
+          )}
+        </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   );

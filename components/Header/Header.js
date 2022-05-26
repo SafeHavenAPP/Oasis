@@ -1,27 +1,25 @@
 import * as React from "react";
 import {
   StyleSheet,
-  Text,
   View,
   Button,
   Modal,
-  TouchableOpacity,
 } from "react-native";
 import SignupForm from "../Authentication/SignupForm.js";
 import SigninForm from "../Authentication/SigninForm.js";
 
-export default function Header({ isLoggedIn, setIsLoggedIn }) {
-  const [user, setUser] = React.useState([]);
+export default function Header({ user, setUser, isLoggedIn, setIsLoggedIn }) {
+
   const [isSignupVisible, setIsSignupVisible] = React.useState(false);
   const [isSigninVisible, setIsSigninVisible] = React.useState(false);
 
   //modal pop up
-  const toggleSignup = () => {
+  const toggleModalSignup = () => {
     setIsSignupVisible(!isSignupVisible);
   };
 
   //modal pop up
-  const toggleSignin = () => {
+  const toggleModalSignin = () => {
     setIsSigninVisible(!isSigninVisible);
   };
 
@@ -44,8 +42,8 @@ export default function Header({ isLoggedIn, setIsLoggedIn }) {
       ) : (
         <>
           <View style={styles.buttonView}>
-            <Button onPress={toggleSignin} title="Sign In" value={isLoggedIn} />
-            <Button onPress={toggleSignup} title="Sign Up" />
+            <Button onPress={toggleModalSignin} title="Sign In" value={isLoggedIn} />
+            <Button onPress={toggleModalSignup} title="Sign Up" />
           </View>
           <View View style={styles.centeredView}>
             <Modal
@@ -55,10 +53,9 @@ export default function Header({ isLoggedIn, setIsLoggedIn }) {
             >
               <View style={styles.centeredView}>
                 <View style={styles.modalView}>
-                  <Button title="X" onPress={toggleSignup} />
+                  <Button title="Close" onPress={toggleModalSignup} />
                   <SignupForm
-                    toggleSignup={toggleSignup}
-                    setUser={setUser}
+                    toggleSignup={toggleModalSignup}
                     user={user}
                   />
                 </View>
@@ -74,11 +71,9 @@ export default function Header({ isLoggedIn, setIsLoggedIn }) {
             >
               <View style={styles.centeredView}>
                 <View style={styles.modalView}>
-                  <TouchableOpacity onPress={toggleSignin}>
-                    <Text>x</Text>
-                  </TouchableOpacity>
+                <Button title="Close" onPress={toggleModalSignin} />
                   <SigninForm
-                    toggleSignin={toggleSignin}
+                    toggleSignin={toggleModalSignin}
                     isLoggedIn={isLoggedIn}
                     setIsLoggedIn={setIsLoggedIn}
                     setUser={setUser}
