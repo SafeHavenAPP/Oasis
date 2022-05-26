@@ -1,69 +1,111 @@
 import * as React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button, Modal } from 'react-native';
+import { StyleSheet, Text, View, Button, Modal, TouchableOpacity } from 'react-native';
 // import ModalLogin from  '../Authentication/Modal.js'
-import LoginForm from '../Authentication/LoginForm.js'
+import SignupForm from '../Authentication/SignupForm.js'
+import SigninForm from '../Authentication/SigninForm.js';
 
 
 export default function Header() {
-  // const [modalShown, setModalShown] = React.useState(false);
+
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
-  const [isModalVisible, setIsModalVisible] = React.useState(false);
+  const [user, setUser] = React.useState([]);
+  const [isSignupVisible, setIsSignupVisible] = React.useState(false);
+  const [isSigninVisible, setIsSigninVisible] = React.useState(false);
 
-  const toggleModal = () => {
-    console.log('HERE----------')
-    setIsModalVisible(!isModalVisible);
+ 
+  const toggleSignup = () => {
+    setIsSignupVisible(!isSignupVisible);
   };
-  
 
+  const toggleSignin = () => {
+    setIsSigninVisible(!isSigninVisible);
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    setUser([]);
+  }
 
   return (
     <View style={styles.container}>
-      {/* TODO: Conditionally render login/Logout buttons */}
-      {isLoggedIn === true?
-      <>
-      <Button title='Profile' />
-      <Button title='Logout' />
-      </>
-      :
-      <>
-      <Button onPress={ toggleModal } title='Login' />
-      <View View style={styles.centeredView}>
-        <Modal 
-        visible = { isModalVisible } 
-        animationType="slide"
-        transparent={true}>  
-          <View style={styles.centeredView}>
-            <View style={styles.modalView}>
-            <LoginForm />
-            <Button title='X' onPress={ toggleModal } onRequestClose={() => {
-              setIsModalVisible(!isModalVisible);
-            }}/>
-            </View>
+
+      {isLoggedIn === true ?
+        <>
+          <View style={styles.buttonView}>
+            <Button onPress={handleLogout} title='Log out' />
           </View>
-        </Modal>
-      <Button title='Signup' />
-      </View>
-      </>
-    }
+        </>
+        :
+        <>
+          <View style={styles.buttonView}>
+            <Button 
+              onPress={toggleSignin} 
+              title="Sign In" 
+              value={isLoggedIn}
+              
+              />
+            <Button onPress={toggleSignup} title='Sign Up' />
+          </View>
+          <View View style={styles.centeredView}>
+            <Modal
+              visible={isSignupVisible}
+              animationType="slide"
+              transparent={true}>
+              <View style={styles.centeredView}>
+                <View style={styles.modalView}>
+                  <Button title='X' onPress={toggleSignup} />
+                  <SignupForm
+                    toggleSignup={toggleSignup}
+                    setUser={setUser}
+                    user={user}
+                  />
+                </View>
+              </View>
+            </Modal>
+          </View>
 
-    {/* {modalShown === true ?
-    <>
-      <ModalLogin />
-    </>
-    :null} */}
+          <View View style={styles.centeredView}>
+            <Modal
+              visible={isSigninVisible}
+              animationType="slide"
+              transparent={true}>
+              <View style={styles.centeredView}>
+                <View style={styles.modalView}>
+                  <TouchableOpacity onPress={toggleSignin} >
+                    <Text>x</Text>
+                  </TouchableOpacity>
+                  <SigninForm
+                    toggleSignin={toggleSignin}
+                    isLoggedIn={isLoggedIn}
+                    setIsLoggedIn={setIsLoggedIn}
+                    setUser={setUser}
+                    user={user}
+                  />
+                </View>
+              </View>
+            </Modal>
+          </View>
+        </>
+      }
 
-   </View>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#AEC6CF',
-    alignItems: 'stretch',
-    // justifyContent: 'space-evenly',
-  },
+  // container: {
+  //   backgroundColor:'#F8F8F8',
+  //   justifyContent:'space-around',
+  //   alignItems:'center',
+  //   height: 100,
+  //   width: 400,
+  //   shadowColor:'#F8F8F8',
+  //   shadowOffset:{ width:0, height:2 },
+  //   shadowOpacity:0.5,
+  //   elevation:2,
+  //   position: 'absolute'
+  // },
   centeredView: {
     flex: 1,
     justifyContent: "center",
@@ -85,4 +127,11 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5
   },
+  buttonView: {
+    display: 'flex',
+    width: 375,
+    margin: 'auto',
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+  }
 });

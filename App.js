@@ -1,37 +1,42 @@
+// import 'react-native-gesture-handler';
 import * as React from 'react';
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Footer from './components/Footer/Footer.js'
+// import { createDrawerNavigator } from '@react-navigation/drawer'
+import { NavigationContainer } from '@react-navigation/native';
+// import Footer from './components/Footer/Footer.js'
 import Home from './components/Home/Home.js'
 import Profile from './components/Profile/Profile.js';
-// import Header from './components/Header.js';
+import Header from './components/Header/Header.js';
 
 export default function App() {
 
+  // const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const Stack = createNativeStackNavigator();
+  // const Drawer = createDrawerNavigator();
 
   return (
     <NavigationContainer>
       <Stack.Navigator 
-      initialRouteName="Home" 
-      // options={{headerTitle: () => (
-      //   <Header />
-      // )}}
+      initialRouteName="Home"
+      screenOptions={{headerTitle: () => (
+          <Header
+            // isLoggedIn={isLoggedIn}
+            // setIsLoggedIn={setIsLoggedIn}
+          />
+      )}} 
       >
         <Stack.Screen 
           name='Home' 
-          component={Home}
-          options={{ title: 'My home' }}
+          component={Home} 
           />
+        
+
         <Stack.Screen 
         name='Profile' 
-        component={Profile} 
-        options={{ title: 'My Profile' }}
-
+        component={Profile}
         />
-        {/* <Footer /> */}
+
       </Stack.Navigator>
     </NavigationContainer>
   );
