@@ -7,6 +7,8 @@ export default function SigninForm({ toggleSignin, setIsLoggedIn, isLoggedIn, us
   const [username, setUsername] = React.useState('')
   const [password, setPassword] = React.useState('')
 
+
+  
   const handleSubmit = async () => {
     try {
       fetch('https://oasis-server-app.herokuapp.com/auth/sign_in', {
@@ -23,15 +25,20 @@ export default function SigninForm({ toggleSignin, setIsLoggedIn, isLoggedIn, us
       })
       .then((response) => response.json())
       .then(data => {
-      setUser([...user, data])
-    })
-    .catch(error => console.log(error))
-    setIsLoggedIn(!isLoggedIn)
-    toggleSignin();
+        setUser([...user, data])
+      })
+      .catch(error => console.log(error))
+      setIsLoggedIn(!isLoggedIn)
+      toggleSignin();
     } catch(e){
       console.log(e);
     }
   }
+
+  // React.useEffect(() => {
+  // }, [isLoggedIn])
+  //   console.log(isLoggedIn);
+  
   return (
     <View>
       <Text> Oasis Sign In  </Text>
@@ -42,12 +49,13 @@ export default function SigninForm({ toggleSignin, setIsLoggedIn, isLoggedIn, us
           secureTextEntry={true}
           placeholder="password"
           style={styles.input}
-        />
+          />
         <Switch 
           title='Submit' 
           onChange={handleSubmit}
           value={isLoggedIn}
           onValueChange={(value) => {
+            console.log(value);
             EventRegister.emit('loggedIn', value)
           }} 
           />
