@@ -15,7 +15,6 @@ export default function Home({
   setLocations,
   navigation,
   isLoggedIn,
-  user,
 }) {
 
 
