@@ -1,6 +1,6 @@
 # Oasis
 
-This is a one stop shop for people in the LGBTQ+ community to access locations that promote acceptance of all backgrounds. Those who are signed up for this application cannot not only access safe spaces, but also generate safe spaces of their own to share with others on the platform.  The signed in user can also keep a history of preferred settings, favorite places/locations, etc.
+This is a platform that is intended for individuals in diverse minority communitites to have access to information about various locations that promote acceptance of all backgrounds. Those who are signed up for this application cannot not only access safe spaces, but also generate safe spaces of their own to share with others on the platform.  The signed in user can also keep a history of preferred settings, favorite places/locations, etc.
 
 
 ## WIREFRAME
