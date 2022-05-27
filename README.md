@@ -34,11 +34,13 @@ Download the [Expo go app](https://expo.dev/@tiarabcodes1/js-401d46-class-41), a
 - Review React Native [documentation](https://reactnative.dev/) for component usage.
 
 
-## WIREFRAME
+## WIREFRAMES
 
-![OASIS WIREFRAME1](https://user-images.githubusercontent.com/90294860/169873896-70f59583-6d49-45f9-aa0b-7cd73c27b32c.png)
+![MAIN-WIREFRAME](https://user-images.githubusercontent.com/90294860/170762275-90bcaee4-88d5-4812-8de7-8a860c4d1527.png)
 
-![OASIS WIREFRAME2](https://user-images.githubusercontent.com/90294860/169873907-0a67a141-a777-4dab-b926-9df1015c706e.png)
+![PROFILE-WIREFRAME](https://user-images.githubusercontent.com/90294860/170761958-c943406a-88f1-4583-a454-3a096fd5b438.png)
+
+
 
 
 ## Team Members
