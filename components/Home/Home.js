@@ -58,6 +58,9 @@ export default function Home({
             />
           ) : null}
           </View>
+          <View style={styles.container}>
+          <Text style={styles.text}>Welcome to Oasis, a space to share any 'Open to all' businesses, restaurants, or general locations that you can think of. Simply sign up and contribute to our growing collection of all-inclusive spots!</Text>
+          </View>
           <View>
             {locations
               ? locations.map((location) => (
