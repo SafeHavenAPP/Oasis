@@ -1,13 +1,13 @@
 {
   "expo": {
-    "name": "oasis",
-    "slug": "oasis",
+    "name": "Oasis",
+    "slug": "Oasis",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/oasis.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/oasis.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -18,11 +18,15 @@
       "**/*"
     ],
     "ios": {
+      "bundleIdentifier": "com.safehaven.oasis",
+      "buildNumber": "1.0.0",
       "supportsTablet": true
     },
     "android": {
+      "package": "com.safehaven.oasis",
+      "versionCode": 1,
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/oasis.png",
         "backgroundColor": "#FFFFFF"
       }
     },
