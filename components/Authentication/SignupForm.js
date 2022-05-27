@@ -38,25 +38,32 @@ export default function SignupForm({ toggleSignup, setUser }) {
 
   return (
     <View>
-      <Text> Oasis SignUp </Text>
+      <Text style={styles.modalTitle}> Oasis SignUp </Text>
       <View>
         <TextInput
           style={styles.input}
           onChangeText={setFullName}
           placeholder="Enter Full Name"
+          placeholderTextColor='slategray'
         />
         <TextInput
           style={styles.input}
           onChangeText={setUsername}
           placeholder="Enter Username"
+          placeholderTextColor='slategray'
         />
         <TextInput
           onChangeText={setPassword}
           secureTextEntry={true}
           placeholder="Enter Password"
+          placeholderTextColor='slategray'
           style={styles.input}
         />
-        <Button title="Submit" onPress={handleSubmit} />
+        <Button 
+          title="Submit" 
+          onPress={handleSubmit}
+          color='#064e3b'
+          />
       </View>
     </View>
   );
@@ -70,4 +77,9 @@ const styles = StyleSheet.create({
     padding: 10,
     color: "black",
   },
+  modalTitle: {
+    fontSize: 20,
+    textAlign: 'center',
+    color: '#c96747'
+  }
 });

@@ -71,9 +71,9 @@ export default function Profile({ locations, setLocations, isLoggedIn, navigatio
   React.useEffect(() => {
     fetchData();
   }, []);
-  
+
   React.useEffect(() => {
-    if(isLoggedIn === false){
+    if (isLoggedIn === false) {
       navigation.navigate('Home');
     }
   }, [isLoggedIn])
@@ -82,57 +82,65 @@ export default function Profile({ locations, setLocations, isLoggedIn, navigatio
     <NativeBaseProvider>
       <View style={styles.container}>
         <StatusBar style="auto" />
-      { isLoggedIn ? 
-        <>
-        <Button title="Create A Location" onPress={toggleCreate} />
-        {/* <View View style={styles.centeredView}> */}
-          <Modal visible={showCreate} animationType="slide" transparent={true}>
-            <View style={styles.centeredView}>
-              <View style={styles.modalView}>
-                <Button title="Close" onPress={toggleCreate} color="crimson" />
-                <LocationForm
-                  fetchData={fetchData}
-                  toggleCreate={toggleCreate}
-                  user={user}
-                />
-              </View>
+        {isLoggedIn ?
+          <>
+            <View style={{marginBottom: 15}}>
+              <Button
+                title="Create A Location"
+                onPress={toggleCreate}
+                color='#841584'
+              />
             </View>
-          </Modal>
-          </> 
+            {/* <View View style={styles.centeredView}> */}
+            <Modal visible={showCreate} animationType="slide" transparent={true}>
+              <View style={styles.centeredView}>
+                <View style={styles.modalView}>
+                  <Button title="Close" onPress={toggleCreate} color="crimson" />
+                  <LocationForm
+                    fetchData={fetchData}
+                    toggleCreate={toggleCreate}
+                    user={user}
+                  />
+                </View>
+              </View>
+            </Modal>
+          </>
           : null}
-          <ScrollView>
-            {locations && isLoggedIn
-              ? locations.filter(location=> location.userID === user[0]._id).map((location) => (
-                  <Box
-                    key={location._id}
-                    alignItems="center"
-                    rounded="lg"
-                    borderWidth="5"
-                    borderColor="gray.500"
-                    marginBottom={5}
-                    padding={3}
-                    height={250}
-                  >
-                    <Text>Location Name: {location.locationName}</Text>
-                    <Text>Location Address: {location.address}</Text>
-                    <Text>Status: {location.status}</Text>
-                    <Text>Created By: {location.username}</Text>
-                    <View style={styles.boxButtonView}>
-                      <Button
-                        title="Update A Location"
-                        onPress={() => handleUpdate(location)}
-                      />
-                      <Button
-                        title="Delete A Location"
-                        onPress={() => handleDelete(location._id)}
-                        color="orange"
-                      />
-                    </View>
-                  </Box>
-                ))
-              : null}
-          </ScrollView>
-        </View>
+        <ScrollView>
+          {locations && isLoggedIn
+            ? locations.filter(location => location.userID === user[0]._id).map((location) => (
+              <Box
+                key={location._id}
+                alignItems="center"
+                rounded="lg"
+                borderWidth="5"
+                borderColor="#064e3b"
+                backgroundColor='#a8ffec'
+                marginBottom={5}
+                padding={4}
+                height={250}
+              >
+                <Text style={styles.text}>Location Name: {location.locationName}</Text>
+                <Text style={styles.text}>Location Address: {location.address}</Text>
+                <Text style={styles.text}>Open To All: {location.status}</Text>
+                <Text style={styles.text}>Created By: {location.username}</Text>
+                <View style={styles.boxButtonView}>
+                  <Button
+                    title="Update A Location"
+                    onPress={() => handleUpdate(location)}
+                    color='#064e3b'
+                  />
+                  <Button
+                    title="Delete A Location"
+                    onPress={() => handleDelete(location._id)}
+                    color="#064e3b"
+                  />
+                </View>
+              </Box>
+            ))
+            : null}
+        </ScrollView>
+      </View>
       {/* </View> */}
       <Modal visible={showUpdate} animationType="slide" transparent={true}>
         <View style={styles.centeredView}>
@@ -154,7 +162,7 @@ export default function Profile({ locations, setLocations, isLoggedIn, navigatio
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#59c2ab",
     alignItems: "center",
     justifyContent: "center",
     paddingTop: 20,
@@ -192,4 +200,10 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "space-evenly",
   },
+  text: {
+    color: '#c96747',
+    fontSize: 17,
+    marginBottom: 5,
+    fontWeight: 'bold'
+  }
 });
