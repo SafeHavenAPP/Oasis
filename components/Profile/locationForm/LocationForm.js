@@ -47,11 +47,28 @@ export default function LocationForm({ fetchData, toggleCreate, user }) {
   return (
     <View>
       <Text style={styles.header}>Create A Location</Text>
-      <TextInput textContentType='addressCity' style={styles.input} placeholder= "Location Name" onChangeText={setLocationName} />
-      <TextInput style={styles.input} placeholder= "Address" onChangeText={setAddress} />
+      <TextInput 
+        textContentType='addressCity' 
+        style={styles.input} 
+        placeholder= "Location Name" 
+        placeholderTextColor='black'
+        onChangeText={setLocationName} />
+      <TextInput 
+        style={styles.input} 
+        placeholder= "Address" 
+        placeholderTextColor='slategray'
+        onChangeText={setAddress} />
       {/* TODO: Update to switch */}
-      <TextInput style={styles.input} placeholder= "Open-to-all Status" onChangeText={setStatus} />
-      <Button title="Add Location" onPress={handleSubmit} />
+      <TextInput 
+        style={styles.input} 
+        placeholder= "Open-to-all Status" 
+        placeholderTextColor='slategray'
+        onChangeText={setStatus} />
+      <Button 
+        title="Add Location" 
+        onPress={handleSubmit} 
+        color='#064e3b'
+        />
     </View>
   )
 

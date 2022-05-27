@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { Text, View, TextInput,  StyleSheet, Switch, Alert} from 'react-native';
+import { Text, View, TextInput,  StyleSheet, Switch, Alert, Button} from 'react-native';
 import { EventRegister } from 'react-native-event-listeners';
 import jwt_decode from 'jwt-decode'
+
 
 
 export default function SigninForm({ toggleSignin, setIsLoggedIn, isLoggedIn, user, setUser }) {
@@ -41,23 +42,25 @@ export default function SigninForm({ toggleSignin, setIsLoggedIn, isLoggedIn, us
   
   return (
     <View>
-      <Text> Oasis Sign In  </Text>
+      <Text style={styles.modalTitle}> Oasis Sign In  </Text>
       <View>
-        <TextInput style={styles.input} onChangeText={setUsername}  placeholder="username" />
+        <TextInput 
+          style={styles.input} 
+          onChangeText={setUsername}  
+          placeholder="username"
+          placeholderTextColor='slategray'
+          />
         <TextInput
           onChangeText={setPassword} 
           secureTextEntry={true}
           placeholder="password"
+          placeholderTextColor='slategray'
           style={styles.input}
           />
-        <Switch 
+        <Button 
           title='Submit' 
-          onChange={handleSubmit}
-          value={isLoggedIn}
-          onValueChange={(value) => {
-            console.log(value);
-            EventRegister.emit('loggedIn', value)
-          }} 
+          onPress={handleSubmit}
+          color='#064e3b'
           />
       </View>
     </View>
@@ -72,4 +75,9 @@ const styles = StyleSheet.create({
     padding: 10,
     color: 'black'
   },
+  modalTitle: {
+    fontSize: 20,
+    textAlign: 'center',
+    color: '#c96747'
+  }
 });

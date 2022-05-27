@@ -52,38 +52,51 @@ export default function Home({
         {/* <NativeBaseProvider> */}
         {/* <YelpLocations /> */}
         {/* </NativeBaseProvider> */}
-        <View>
+        {/* <Text style={styles.homeTitle}>Oasis</Text> */}
+        {/* <View style={styles.profileButton}>
           {isLoggedIn === true ? (
+          
             <Button
               color="#841584"
               title="Profile"
               onPress={() => navigation.navigate("Profile")}
             />
           ) : null}
-        </View>
-        <View>
-          <ScrollView>
+        </View> */}
+        <ScrollView>
+        <View style={styles.profileButton}>
+          {isLoggedIn === true ? (
+          
+            <Button
+              color="#841584"
+              title="Profile"
+              onPress={() => navigation.navigate("Profile")}
+            />
+          ) : null}
+          </View>
+          <View>
             {locations
               ? locations.map((location) => (
-                  <Box
-                    key={location._id}
-                    alignItems="center"
-                    rounded="lg"
-                    borderWidth="5"
-                    borderColor="gray.500"
-                    marginBottom={5}
-                    padding={3}
-                    height={250}
-                  >
-                    <Text>Location Name: {location.locationName}</Text>
-                    <Text>Location Address: {location.address}</Text>
-                    <Text>Status: {location.status}</Text>
-                    <Text>Username: {location.username}</Text>
-                  </Box>
-                ))
+                <Box
+                  key={location._id}
+                  alignItems="center"
+                  rounded="lg"
+                  borderWidth="5"
+                  borderColor='#064e3b'
+                  backgroundColor='#a8ffec'
+                  marginBottom={5}
+                  padding={3}
+                  height={150}
+                >
+                  <Text style={styles.text}>Location Name: {location.locationName}</Text>
+                  <Text style={styles.text}>Location Address: {location.address}</Text>
+                  <Text style={styles.text}>Open To All: {location.status}</Text>
+                  <Text style={styles.text}>Created By: {location.username}</Text>
+                </Box>
+              ))
               : null}
-          </ScrollView>
-        </View>
+          </View>
+        </ScrollView>
       </SafeAreaView>
     </NativeBaseProvider>
   );
@@ -92,10 +105,26 @@ export default function Home({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#59c2ab",
     alignItems: "center",
     justifyContent: "center",
   },
+  homeTitle: {
+    marginRight: 'auto',
+    fontSize: 30,
+    paddingTop: 25,
+    marginBottom: 25,
+  },
+  profileButton: {
+    marginBottom: 15,
+    marginTop: 15
+  },
+  text: {
+    color: '#c96747',
+    fontSize: 17,
+    marginBottom: 5,
+    fontWeight: 'bold'
+  }
   // map: {
   //   width: Dimensions.get("window").width,
   //   height: 600,
