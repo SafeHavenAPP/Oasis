@@ -46,15 +46,19 @@ export default function UpdateForm({ locationToUpdate, toggleUpdate, fetchData }
     // I set a default value here so that if unchanged by the user, it persists in the database
     <View>
       <Text style={styles.header}>Update A Location</Text>
-      <TextInput style={styles.input} defaultValue={locationToUpdate.locationName} onChangeText={setLocationName} />
-      <TextInput style={styles.input} defaultValue={locationToUpdate.address} onChangeText={setAddress} />
-      <TextInput style={styles.input} defaultValue={locationToUpdate.status} onChangeText={setStatus} />
-      <TextInput style={styles.input} value={locationToUpdate.username} />
-      <Button 
-        title="Update" 
-        onPress={updateLocation} 
-        color='#064e3b'
-        />
+      <View style={styles.centeredView}>
+        <Text>Location Name</Text>
+        <TextInput style={styles.input} defaultValue={locationToUpdate.locationName} onChangeText={setLocationName} />
+        <Text>Update Address</Text>
+        <TextInput style={styles.input} defaultValue={locationToUpdate.address} onChangeText={setAddress} />
+        <Text>Update Open Status</Text>
+        <TextInput style={styles.input} defaultValue={locationToUpdate.status} onChangeText={setStatus} />
+        <Button 
+          title="Update" 
+          onPress={updateLocation} 
+          color='#064e3b'
+          />
+        </View>
     </View>
   )
 
@@ -64,12 +68,20 @@ const styles = StyleSheet.create({
   input: {
     height: 40,
     margin: 12,
+    width: 200, 
     borderWidth: 1,
     padding: 10,
     color: 'black'
   },
   header: {
-    alignSelf: 'center',
-    fontSize: 20
+    fontSize: 30,
+    textAlign: 'center',
+    color: '#c96747',
+    fontWeight: 'bold'
+  },
+  centeredView: {
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22,
   }
 });

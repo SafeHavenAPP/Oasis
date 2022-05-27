@@ -1,11 +1,20 @@
 import * as React from 'react';
-import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, Alert, Switch } from 'react-native';
 
 export default function LocationForm({ fetchData, toggleCreate, user }) {
 
   const [locationName, setLocationName] = React.useState('')
   const [address, setAddress] = React.useState('')
-  const [status, setStatus] = React.useState('')
+  const [status, setStatus] = React.useState('Not Open')
+  const [isEnabled, setIsEnabled] = React.useState(false);
+  const toggleSwitch = () => {
+    setIsEnabled(previousState => !previousState);
+    if(isEnabled === false){
+      setStatus('Open')
+    } else {
+      setStatus('Not Open');
+    }
+    }
 
   const username = user[0].username
   const userID = user[0]._id
@@ -45,30 +54,33 @@ export default function LocationForm({ fetchData, toggleCreate, user }) {
   }
 
   return (
-    <View>
-      <Text style={styles.header}>Create A Location</Text>
-      <TextInput 
-        textContentType='addressCity' 
-        style={styles.input} 
-        placeholder= "Location Name" 
-        placeholderTextColor='black'
-        onChangeText={setLocationName} />
-      <TextInput 
-        style={styles.input} 
-        placeholder= "Address" 
-        placeholderTextColor='slategray'
-        onChangeText={setAddress} />
-      {/* TODO: Update to switch */}
-      <TextInput 
-        style={styles.input} 
-        placeholder= "Open-to-all Status" 
-        placeholderTextColor='slategray'
-        onChangeText={setStatus} />
-      <Button 
-        title="Add Location" 
-        onPress={handleSubmit} 
-        color='#064e3b'
-        />
+    <View >
+      <Text style={styles.modalTitle}>Create A Location</Text>
+      <View style={styles.centeredView}>
+        <TextInput 
+          textContentType='addressCity' 
+          style={styles.input} 
+          placeholder= "Location Name" 
+          placeholderTextColor='slategray'
+          onChangeText={setLocationName} />
+        <TextInput 
+          style={styles.input} 
+          placeholder= "Address" 
+          placeholderTextColor='slategray'
+          onChangeText={setAddress} />
+          <Text>Open-To-All Status: {status}</Text>
+          <Switch
+            trackColor={{ false: "#767577", true: "#841584" }}
+            thumbColor={isEnabled ? "#59c2ab" : "#064e3b"}
+            onValueChange={toggleSwitch}
+            value={isEnabled}
+          />
+        <Button 
+          title="Add Location" 
+          onPress={handleSubmit} 
+          color='#064e3b'
+          />
+        </View>
     </View>
   )
 
@@ -78,12 +90,20 @@ const styles = StyleSheet.create({
   input: {
     height: 40,
     margin: 12,
+    width: 200, 
     borderWidth: 1,
     padding: 10,
     color: 'black'
   },
-  header: {
-    alignSelf: 'center',
-    fontSize: 20
+  modalTitle: {
+    fontSize: 30,
+    textAlign: 'center',
+    color: '#c96747',
+    fontWeight: 'bold'
+  },
+  centeredView: {
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22,
   }
 });

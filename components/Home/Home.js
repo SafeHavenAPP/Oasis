@@ -1,6 +1,6 @@
 import * as React from "react";
 import { StatusBar } from "expo-status-bar";
-import { NativeBaseProvider, Box, ScrollView } from "native-base";
+import { NativeBaseProvider, useColorMode, ScrollView, Box} from "native-base";
 import {
   StyleSheet,
   Button,
@@ -17,6 +17,9 @@ export default function Home({
   isLoggedIn,
   user,
 }) {
+
+
+
   function fetchData() {
     try {
       fetch("https://oasis-server-app.herokuapp.com/locations", {
@@ -40,7 +43,9 @@ export default function Home({
   React.useEffect(() => {
     fetchData();
   }, []);
-
+  const {
+    toggleColorMode
+  } = useColorMode();
   return (
     <NativeBaseProvider>
       <SafeAreaView style={styles.container}>
@@ -59,7 +64,8 @@ export default function Home({
           ) : null}
           </View>
           <View style={styles.container}>
-          <Text style={styles.text}>Welcome to Oasis, a space to share any 'Open to all' businesses, restaurants, or general locations that you can think of. Simply sign up and contribute to our growing collection of all-inclusive spots!</Text>
+          <Text style={styles.aboutText}>Welcome to Oasis, a space to share any 'Open to all' businesses, restaurants, or general locations that you can think of. </Text>
+          <Text style={styles.aboutText2}>Simply sign up and contribute to our growing collection of all-inclusive spots!</Text>
           </View>
           <View>
             {locations
@@ -95,6 +101,24 @@ const styles = StyleSheet.create({
     backgroundColor: "#59c2ab",
     alignItems: "center",
     justifyContent: "center",
+  },
+  aboutText: {
+    fontWeight: 'bold',
+    fontSize: 25 ,
+    margin: 5,
+    marginBottom: 10,
+    textAlign: 'center',
+    color: '#064e3b',
+  },
+  aboutText2: {
+    fontWeight: 'bold',
+    fontSize: 25 ,
+    margin: 5,
+    marginBottom: 10,
+    textAlign: 'center',
+    color: '#064e3b',
+    borderBottomWidth: 5,
+    borderBottomColor:'#c96747'
   },
   homeTitle: {
     marginRight: 'auto',

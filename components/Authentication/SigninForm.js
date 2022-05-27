@@ -42,7 +42,7 @@ export default function SigninForm({ toggleSignin, setIsLoggedIn, isLoggedIn, us
   return (
     <View>
       <Text style={styles.modalTitle}> Oasis Sign In  </Text>
-      <View>
+      <View style={styles.centeredView}>
         <TextInput 
           style={styles.input} 
           onChangeText={setUsername}  
@@ -70,13 +70,20 @@ const styles = StyleSheet.create({
   input: {
     height: 40,
     margin: 12,
+    width: 200, 
     borderWidth: 1,
     padding: 10,
     color: 'black'
   },
   modalTitle: {
-    fontSize: 20,
+    fontSize: 30,
     textAlign: 'center',
-    color: '#c96747'
+    color: '#c96747',
+    fontWeight: 'bold'
+  },
+  centeredView: {
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22,
   }
 });

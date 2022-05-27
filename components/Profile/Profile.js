@@ -94,12 +94,14 @@ export default function Profile({ locations, setLocations, isLoggedIn, navigatio
             <Modal visible={showCreate} animationType="slide" transparent={true}>
               <View style={styles.centeredView}>
                 <View style={styles.modalView}>
-                  <Button title="Close" onPress={toggleCreate} color="crimson" />
                   <LocationForm
                     fetchData={fetchData}
                     toggleCreate={toggleCreate}
                     user={user}
                   />
+                  <View style={{ marginTop: 15 }}>
+                  <Button title="Close" onPress={toggleCreate} color='#841584' />
+                  </View>
                 </View>
               </View>
             </Modal>
@@ -143,13 +145,14 @@ export default function Profile({ locations, setLocations, isLoggedIn, navigatio
       <Modal visible={showUpdate} animationType="slide" transparent={true}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Button title="Close" onPress={toggleUpdate} color="crimson" />
-
             <UpdateForm
               fetchData={fetchData}
               toggleUpdate={toggleUpdate}
               locationToUpdate={locationToUpdate}
             />
+            <View style={{ marginTop: 15 }}>
+            <Button title="Close" onPress={toggleUpdate} color='#841584' />
+            </View>
           </View>
         </View>
       </Modal>
@@ -173,7 +176,8 @@ const styles = StyleSheet.create({
   },
   modalView: {
     margin: 20,
-    backgroundColor: "white",
+    width: 275,
+    backgroundColor: '#a8ffec',
     borderRadius: 20,
     padding: 35,
     alignItems: "center",
