@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Text, View, TextInput, Button, StyleSheet } from "react-native";
+import { Text, View, TextInput, Button, StyleSheet, Alert } from "react-native";
 
 export default function SignupForm({ toggleSignup, setUser }) {
   const [username, setUsername] = React.useState("");
@@ -23,7 +23,11 @@ export default function SignupForm({ toggleSignup, setUser }) {
       })
         .then((response) => response.json())
         .then((data) => {
-          setUser([data]);
+          if(data.message){
+            Alert.alert(data.message.message);
+          } else{
+            Alert.alert('You are signed up!')
+          }
         })
         .catch((error) => console.log(error));
       toggleSignup();

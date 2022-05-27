@@ -8,7 +8,7 @@ import {
 import SignupForm from "../Authentication/SignupForm.js";
 import SigninForm from "../Authentication/SigninForm.js";
 
-export default function Header({ user, setUser, isLoggedIn, setIsLoggedIn }) {
+export default function Header({ user, setUser, isLoggedIn, setIsLoggedIn, handleLogout }) {
 
   const [isSignupVisible, setIsSignupVisible] = React.useState(false);
   const [isSigninVisible, setIsSigninVisible] = React.useState(false);
@@ -23,13 +23,11 @@ export default function Header({ user, setUser, isLoggedIn, setIsLoggedIn }) {
     setIsSigninVisible(!isSigninVisible);
   };
 
-  const handleLogout = () => {
-    setIsLoggedIn(false);
-    setUser([]);
-  };
-  // React.useEffect(() => {
-  //   console.log(isLoggedIn);
-  // }, [isLoggedIn])
+  // const handleLogout = () => {
+  //   setIsLoggedIn(false);
+  //   setUser([]);
+  // };
+
 
   return (
     <View style={styles.container}>
@@ -57,6 +55,7 @@ export default function Header({ user, setUser, isLoggedIn, setIsLoggedIn }) {
                   <SignupForm
                     toggleSignup={toggleModalSignup}
                     user={user}
+                    setUser={setUser}
                   />
                 </View>
               </View>

@@ -23,7 +23,8 @@ export default function UpdateForm({ locationToUpdate, toggleUpdate, fetchData }
           locationName,
           address,
           status,
-          username
+          username,
+          userID: locationToUpdate.userID
         })
       })
         .then((response) => response.json())
@@ -48,7 +49,7 @@ export default function UpdateForm({ locationToUpdate, toggleUpdate, fetchData }
       <TextInput style={styles.input} defaultValue={locationToUpdate.locationName} onChangeText={setLocationName} />
       <TextInput style={styles.input} defaultValue={locationToUpdate.address} onChangeText={setAddress} />
       <TextInput style={styles.input} defaultValue={locationToUpdate.status} onChangeText={setStatus} />
-      <TextInput style={styles.input} defaultValue={locationToUpdate.username} onChangeText={setUsername} />
+      <TextInput style={styles.input} value={locationToUpdate.username} />
       <Button title="Update" onPress={updateLocation} />
     </View>
   )
