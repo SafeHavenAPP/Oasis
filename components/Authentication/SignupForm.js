@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Text, View, TextInput, Button, StyleSheet, Alert } from "react-native";
 
-export default function SignupForm({ toggleSignup, setUser }) {
+export default function SignupForm({ toggleSignup }) {
   const [username, setUsername] = React.useState("");
   const [fullName, setFullName] = React.useState("");
   const [password, setPassword] = React.useState("");

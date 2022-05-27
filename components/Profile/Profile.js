@@ -91,7 +91,6 @@ export default function Profile({ locations, setLocations, isLoggedIn, navigatio
                 color='#841584'
               />
             </View>
-            {/* <View View style={styles.centeredView}> */}
             <Modal visible={showCreate} animationType="slide" transparent={true}>
               <View style={styles.centeredView}>
                 <View style={styles.modalView}>
@@ -141,7 +140,6 @@ export default function Profile({ locations, setLocations, isLoggedIn, navigatio
             : null}
         </ScrollView>
       </View>
-      {/* </View> */}
       <Modal visible={showUpdate} animationType="slide" transparent={true}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>

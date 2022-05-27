@@ -6,11 +6,9 @@ import {
   Button,
   View,
   SafeAreaView,
-  Dimensions,
   Text,
 } from "react-native";
-// import { NativeBaseProvider } from "native-base";
-// import YelpLocations from "../searchYelp.js/YelpLocations";
+
 
 export default function Home({
   locations,
@@ -49,20 +47,6 @@ export default function Home({
         <View style={styles.container}>
           <StatusBar style="auto" barStyle="#fff" />
         </View>
-        {/* <NativeBaseProvider> */}
-        {/* <YelpLocations /> */}
-        {/* </NativeBaseProvider> */}
-        {/* <Text style={styles.homeTitle}>Oasis</Text> */}
-        {/* <View style={styles.profileButton}>
-          {isLoggedIn === true ? (
-          
-            <Button
-              color="#841584"
-              title="Profile"
-              onPress={() => navigation.navigate("Profile")}
-            />
-          ) : null}
-        </View> */}
         <ScrollView>
         <View style={styles.profileButton}>
           {isLoggedIn === true ? (
@@ -125,8 +109,4 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     fontWeight: 'bold'
   }
-  // map: {
-  //   width: Dimensions.get("window").width,
-  //   height: 600,
-  // },
 });

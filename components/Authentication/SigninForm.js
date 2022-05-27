@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { Text, View, TextInput,  StyleSheet, Switch, Alert, Button} from 'react-native';
-import { EventRegister } from 'react-native-event-listeners';
+import { Text, View, TextInput,  StyleSheet, Alert, Button} from 'react-native';
 import jwt_decode from 'jwt-decode'
 
 

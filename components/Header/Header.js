@@ -24,12 +24,6 @@ export default function Header({ user, setUser, isLoggedIn, setIsLoggedIn, handl
     setIsSigninVisible(!isSigninVisible);
   };
 
-  // const handleLogout = () => {
-  //   setIsLoggedIn(false);
-  //   setUser([]);
-  // };
-
-
   return (
     <View style={styles.container}>
       {isLoggedIn === true ? (
